@@ -1,0 +1,11 @@
+{
+  "name": "Mi Entrenamiento",
+  "short_name": "Entrenamiento",
+  "start_url": "./plan_entrenamiento_app.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "description": "Diario personal de entrenamiento"
+}

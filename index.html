@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10131a">
+<title>Mi Plan · Entrenamiento</title>
+<style>
+:root{--bg:#0b0d12;--card:#141821;--card2:#1b202b;--text:#f5f7fb;--muted:#9ca5b5;--accent:#8eea68;--accent2:#c9ffb7;--line:#2a303c;--danger:#ff6b6b;--shadow:0 12px 30px rgba(0,0,0,.28)}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% -10%,#263044 0,#0b0d12 45%);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}button{font:inherit;color:inherit;border:0;cursor:pointer} .app{max-width:760px;margin:auto;padding:18px 14px 34px}
+.header{display:flex;justify-content:space-between;align-items:center;margin:5px 0 18px}.eyebrow{font-size:12px;color:var(--accent);font-weight:800;letter-spacing:.13em;text-transform:uppercase}.title{font-size:30px;line-height:1.05;font-weight:900;margin:5px 0}.sub{color:var(--muted);font-size:13px}.round{width:44px;height:44px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center}
+.hero{background:linear-gradient(135deg,#202735,#12161e);border:1px solid #303746;border-radius:24px;padding:17px;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(142,234,104,.10);right:-70px;top:-70px}.heroTop{display:flex;justify-content:space-between;gap:10px;align-items:center}.hero h2{margin:0;font-size:21px}.hero p{margin:5px 0 0;color:var(--muted);font-size:13px}.progress{height:9px;background:#292f3a;border-radius:99px;overflow:hidden;margin-top:16px}.bar{height:100%;background:linear-gradient(90deg,var(--accent),#d4ffb7);width:0%;transition:.25s}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.stat{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:15px;padding:9px}.stat b{display:block;font-size:17px}.stat span{font-size:10px;color:var(--muted)}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:16px 0}.tab{background:var(--card);border:1px solid var(--line);padding:11px 7px;border-radius:15px;text-align:center;color:var(--muted);font-weight:800;font-size:12px}.tab.active{background:var(--accent);color:#10140e;border-color:var(--accent)}
+.sectionTitle{display:flex;align-items:end;justify-content:space-between;margin:20px 2px 10px}.sectionTitle h3{margin:0;font-size:18px}.sectionTitle span{color:var(--muted);font-size:11px}
+.exercise{background:var(--card);border:1px solid var(--line);border-radius:21px;padding:13px;margin:9px 0;box-shadow:0 7px 18px rgba(0,0,0,.15)}.exTop{display:flex;gap:11px;align-items:center}.illus{width:62px;height:62px;border-radius:17px;background:linear-gradient(145deg,#242b38,#11151c);display:grid;place-items:center;flex:none;border:1px solid #303744}.illus svg{width:48px;height:48px}.name{font-weight:850;font-size:15px;line-height:1.15}.key{font-size:11px;color:var(--muted);margin-top:4px}.chips{display:flex;flex-wrap:wrap;gap:6px;margin:11px 0}.chip{background:var(--card2);border:1px solid var(--line);padding:6px 8px;border-radius:10px;font-size:11px;color:#dce1e9}.actions{display:flex;gap:7px}.sets{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;flex:1}.set{height:40px;border-radius:12px;background:#242a35;border:1px solid #333a47;font-weight:800;font-size:12px}.set.done{background:var(--accent);color:#10140e;border-color:var(--accent)}.info{width:42px;background:#202631;border:1px solid var(--line);border-radius:12px;font-size:16px}.weightBox{display:flex;align-items:center;gap:8px;margin-top:10px}.weightBox label{font-size:11px;color:var(--muted);white-space:nowrap}.weightBox input{width:100px;background:#0f131a;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 10px;font-weight:800;outline:none}.weightBox input:focus{border-color:var(--accent)}.kg{font-size:11px;color:var(--muted)}.detail{display:none;padding-top:10px;color:var(--muted);font-size:12px;line-height:1.5}.exercise.open .detail{display:block}
+.timer{position:fixed;left:50%;bottom:15px;transform:translateX(-50%) translateY(120px);background:#eef5e9;color:#10140e;border-radius:20px;padding:12px 14px;display:flex;align-items:center;gap:12px;box-shadow:0 15px 40px rgba(0,0,0,.4);transition:.25s;z-index:5}.timer.show{transform:translateX(-50%) translateY(0)}.timer strong{font-size:21px;min-width:58px;text-align:center}.timer button{background:#10140e;color:#fff;border-radius:12px;padding:9px 11px;font-size:12px;font-weight:800}.timer .close{background:transparent;color:#10140e;padding:5px}
+.toast{position:fixed;top:18px;left:50%;transform:translate(-50%,-100px);background:#eaf6e5;color:#111;border-radius:13px;padding:10px 14px;font-weight:800;font-size:12px;z-index:8;transition:.25s}.toast.show{transform:translate(-50%,0)}
+.footer{color:#6f7785;font-size:10px;text-align:center;margin:25px 0 5px}.reset{background:transparent;color:#8d95a4;text-decoration:underline;font-size:11px}
+.history{margin-top:10px;background:#10141b;border:1px solid var(--line);border-radius:14px;padding:10px}.historyHead{display:flex;justify-content:space-between;align-items:center}.historyTitle{font-size:11px;font-weight:850;color:#dfe5ee}.latest{font-size:11px;color:var(--accent);font-weight:850}.historyRows{display:flex;gap:6px;overflow-x:auto;margin-top:8px;padding-bottom:2px}.historyItem{min-width:72px;background:#1a2029;border:1px solid #2a313d;border-radius:10px;padding:6px 7px}.historyItem b{display:block;font-size:12px}.historyItem span{display:block;color:var(--muted);font-size:9px;margin-top:2px}.historyAdd{display:flex;gap:6px;margin-top:8px}.historyAdd input{min-width:0;flex:1;background:#0b0f15;border:1px solid var(--line);color:var(--text);border-radius:9px;padding:8px;font-size:11px}.historyAdd button{background:var(--accent);color:#10140e;border-radius:9px;padding:8px 10px;font-size:11px;font-weight:900}.visualBtn{margin-left:auto;background:#202631;border:1px solid var(--line);border-radius:11px;padding:7px 9px;font-size:11px}.modal{position:fixed;inset:0;background:rgba(3,5,8,.84);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal.show{display:flex}.modalCard{width:min(520px,100%);background:#151a23;border:1px solid #343b48;border-radius:24px;padding:15px;box-shadow:0 25px 80px rgba(0,0,0,.55)}.modalTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.modalTop b{font-size:16px}.modalClose{background:#242b36;border-radius:10px;padding:8px 11px}.bigVisual{height:min(58vh,420px);border-radius:18px;background:radial-gradient(circle,#2a3342,#10141b);display:grid;place-items:center;color:#f4f7fb;overflow:hidden}.bigVisual svg{width:88%;height:88%;max-width:400px;max-height:400px}.modalHint{color:var(--muted);font-size:11px;text-align:center;margin:9px 0 0}
+@media(min-width:600px){.app{padding:28px 22px 45px}.title{font-size:36px}}
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#111111"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"></head>
+<body>
+<div class="app">
+  <header class="header"><div><div class="eyebrow">Tu entrenamiento</div><div class="title">Modo progreso</div><div class="sub">Toca una serie al terminarla. El plan se guarda en este móvil.</div></div><button class="round" onclick="resetAll()" aria-label="Reiniciar">↺</button></header>
+  <section class="hero"><div class="heroTop"><div><h2 id="dayTitle">Día 1 · Hombro + Espalda + Core</h2><p id="dayMeta">≈ 60 min · Completa tus series</p></div><div style="font-size:30px">🏋️</div></div><div class="progress"><div class="bar" id="bar"></div></div><div class="stats"><div class="stat"><b id="done">0/19</b><span>SERIES HECHAS</span></div><div class="stat"><b id="pct">0%</b><span>PROGRESO</span></div><div class="stat"><b id="left">19</b><span>RESTANTES</span></div></div></section>
+  <nav class="tabs"><button class="tab active" data-day="0">DÍA 1<br>ESPALDA</button><button class="tab" data-day="1">DÍA 2<br>PECHO</button><button class="tab" data-day="2">DÍA 3<br>PIERNA</button></nav>
+  <div id="list"></div>
+  <div class="footer">Plan basado en tu documento original. <button class="reset" onclick="resetAll()">Reiniciar todo</button></div>
+</div>
+<div class="timer" id="timer"><strong id="time">60</strong><button onclick="addRest(30)">+30s</button><button onclick="stopTimer()">Parar</button><button class="close" onclick="hideTimer()">×</button></div>
+<div class="modal" id="visualModal" onclick="if(event.target===this)closeVisual()"><div class="modalCard"><div class="modalTop"><b id="visualTitle">Ejercicio</b><button class="modalClose" onclick="closeVisual()">Cerrar</button></div><div class="bigVisual" id="bigVisual"></div><div class="modalHint">Ilustración de referencia · usa siempre la técnica indicada en tu plan.</div></div></div>
+<div class="toast" id="toast">Serie completada ✓</div>
+<script>
+const days=[
+ {title:'Día 1 · Hombro + Espalda + Core',meta:'≈ 60 min',items:[
+ ['Elevaciones laterales con mancuernas',4,'12–15 reps','60s','Sube lento, baja más lento','shoulder'],
+ ['Jalón al pecho (agarre medio/abierto)',4,'10–12 reps','75s','Codos hacia abajo, pecho fuera','back'],
+ ['Press de hombro con mancuernas (sentado)',3,'8–10 reps','90s','No bloquees codos arriba','shoulder'],
+ ['Remo con mancuerna a una mano',3,'10–12 / lado','60s','Aprieta la espalda arriba 1s','back'],
+ ['Face Pull',3,'12–15 reps','45–60s','Corrige hombros adelantados','rear'],
+ ['Plancha',3,'30–45s','—','Core estético','core'],
+ ['Elevaciones de piernas (colgado/banco)',3,'10–12 reps','—','Core estético','core']]},
+ {title:'Día 2 · Pecho + Brazos + Core',meta:'Sesión de fuerza + core',items:[
+ ['Press inclinado (mancuernas/barra)',4,'8–10 reps','90s','Pecho superior','chest'],
+ ['Fondos o press plano',3,'8–12 reps','90s','Sin dolor de hombro','chest'],
+ ['Aperturas inclinadas',3,'12–15 reps','60s','Estiramiento','chest'],
+ ['Curl de bíceps con mancuernas',3,'10–12 reps','60s','Sin balanceo','biceps'],
+ ['Curl martillo',2,'12 reps','45s','Brazo lleno','biceps'],
+ ['Extensión de tríceps en polea',3,'10–12 reps','60s','Control','triceps'],
+ ['Hollow hold',3,'20–30s','—','Abdomen plano','core'],
+ ['Plancha lateral',2,'30s / lado','—','Cintura','core']]},
+ {title:'Día 3 · Pierna + Hombro Posterior + Core',meta:'Sesión de pierna + estabilidad',items:[
+ ['Sentadilla o prensa',4,'8–10 reps','90s','Control','legs'],
+ ['Peso muerto rumano',3,'10–12 reps','90s','Glúteo/femoral','legs'],
+ ['Zancadas caminando',3,'10 / lado','60s','Estabilidad','legs'],
+ ['Pájaros / Reverse fly',4,'12–15 reps','60s','Deltoide posterior','rear'],
+ ['Face Pull',3,'12–15 reps','45s','Postura','rear'],
+ ['Elevaciones de piernas',3,'10–12 reps','—','Core','core'],
+ ['Vacío abdominal (opcional)',3,'15–20s','—','Vacío abdominal','core']]}
+];
+let day=0, state=JSON.parse(localStorage.getItem('trainingState')||'{}'), timerInt=null, remaining=60;
+const totalFor=d=>d.items.reduce((a,x)=>a+x[1],0);
+function icon(type){let extra=''; if(type==='core') extra='<circle cx="25" cy="12" r="5"/><path d="M25 17v16m0-11-10 8m10-8 10 8m-10 3-7 9m7-9 7 9"/>'; else if(type==='legs') extra='<circle cx="25" cy="10" r="5"/><path d="M25 15v13m0 0-9 14m9-14 9 14m-9-22-11 7m11-7 11 7"/>'; else if(type==='chest') extra='<circle cx="25" cy="9" r="5"/><path d="M25 15v17m0-13-13 6m13-6 13 6m-13 7-7 12m7-12 7 12"/><path d="M12 23 4 20m34 3 8-3"/>'; else extra='<circle cx="25" cy="9" r="5"/><path d="M25 15v18m0-12-13-5m13 5 13-5m-13 8-8 12m8-12 8 12"/>'; return `<svg viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${extra}</svg>`}
+function key(i){return day+'-'+i}
+function histKey(i){return 'history-'+key(i)}
+function getHistory(i){return state[histKey(i)]||[]}
+function historyHtml(i){let h=getHistory(i);let latest=h.length?h[h.length-1]:null;return `<div class="history"><div class="historyHead"><span class="historyTitle">📈 Historial de pesos</span><span class="latest">${latest?latest.weight+' kg último':'Sin registros'}</span></div><div class="historyRows">${h.length?h.slice().reverse().map(x=>`<div class="historyItem"><b>${x.weight} kg</b><span>${x.date}</span></div>`).join(''):'<span style="font-size:10px;color:var(--muted)">Añade el peso usado después de entrenar.</span>'}</div><div class="historyAdd"><input id="hist-${i}" inputmode="decimal" type="number" min="0" step="0.5" placeholder="Peso usado (kg)"><button onclick="addHistory(${i})">+ Guardar</button></div></div>`}
+function addHistory(i){let el=document.getElementById('hist-'+i);let v=el.value.trim();if(!v)return;let h=getHistory(i);let now=new Date();let date=now.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric'});h.push({weight:v,date});state[histKey(i)]=h;state['weight-'+key(i)]=v;localStorage.setItem('trainingState',JSON.stringify(state));render();showToast('Peso añadido al historial ✓')}
+function openVisual(i){let e=days[day].items[i];document.getElementById('visualTitle').textContent=e[0];document.getElementById('bigVisual').innerHTML=iconLarge(e[5]);document.getElementById('visualModal').classList.add('show')}
+function closeVisual(){document.getElementById('visualModal').classList.remove('show')}
+function iconLarge(type){let s=icon(type);return s.replace('<svg ','<svg viewBox="0 0 50 50" ')}
+function render(){document.getElementById('dayTitle').textContent=days[day].title;document.getElementById('dayMeta').textContent=days[day].meta+' · Completa tus series';document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('active',i===day));let html='';days[day].items.forEach((e,i)=>{let [name,n,reps,rest,tip,type]=e;html+=`<article class="exercise" id="ex${i}"><div class="exTop"><button class="illus" onclick="openVisual(${i})" aria-label="Ver ilustración de ${name}">${icon(type)}</button><div><div class="name">${name}</div><div class="key">${tip}</div></div><button class="visualBtn" onclick="openVisual(${i})">Ver ↗</button></div><div class="chips"><span class="chip">${n} series</span><span class="chip">${reps}</span><span class="chip">Descanso ${rest}</span></div><div class="actions"><div class="sets">${Array.from({length:n},(_,s)=>`<button class="set ${state[key(i)+'-'+s]?'done':''}" onclick="toggle(${i},${s})">${s+1}</button>`).join('')}</div><button class="info" onclick="toggleInfo(${i})">i</button></div><div class="weightBox"><label for="weight-${i}">Peso de hoy</label><input id="weight-${i}" inputmode="decimal" type="number" min="0" step="0.5" placeholder="Ej. 20" value="${state['weight-'+key(i)]||''}" onchange="saveWeight(${i},this.value)"><span class="kg">kg</span></div>${historyHtml(i)}<div class="detail">Clave: ${tip}. Descansa ${rest} entre series. Al completar una serie puedes iniciar el temporizador de descanso.</div></article>`});document.getElementById('list').innerHTML=html;updateStats()}
+function saveWeight(i,v){let k='weight-'+key(i);if(v==='')delete state[k];else state[k]=v;localStorage.setItem('trainingState',JSON.stringify(state));showToast('Peso guardado ✓')}
+function toggle(i,s){let k=key(i)+'-'+s;state[k]=!state[k];localStorage.setItem('trainingState',JSON.stringify(state));render();if(state[k]){let rest=days[day].items[i][3];let sec=parseRest(rest);if(sec)startTimer(sec);showToast()}}
+function parseRest(s){let m=s.match(/\d+/g);return m?parseInt(m[0])*1:0}
+function updateStats(){let total=totalFor(days[day]),done=0;days[day].items.forEach((e,i)=>{for(let s=0;s<e[1];s++)if(state[key(i)+'-'+s])done++});let pct=Math.round(done/total*100);document.getElementById('done').textContent=done+'/'+total;document.getElementById('pct').textContent=pct+'%';document.getElementById('left').textContent=total-done;document.getElementById('bar').style.width=pct+'%'}
+function toggleInfo(i){document.getElementById('ex'+i).classList.toggle('open')}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{day=+b.dataset.day;render()});
+function startTimer(sec){remaining=sec;document.getElementById('time').textContent=fmt(remaining);document.getElementById('timer').classList.add('show');clearInterval(timerInt);timerInt=setInterval(()=>{remaining--;document.getElementById('time').textContent=fmt(remaining);if(remaining<=0){clearInterval(timerInt);navigator.vibrate?.([150,80,150]);showToast('Descanso terminado 💪')}},1000)}
+function addRest(x){remaining+=x;document.getElementById('time').textContent=fmt(remaining);if(!timerInt)startTimer(remaining)} function stopTimer(){clearInterval(timerInt);timerInt=null;hideTimer()} function hideTimer(){document.getElementById('timer').classList.remove('show')} function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function showToast(msg='Serie completada ✓'){let t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1300)}
+function resetAll(){if(confirm('¿Reiniciar todas las series de los 3 días?')){state={};localStorage.removeItem('trainingState');render();showToast('Progreso reiniciado')}}
+render();
+</script><button id="installPwaBtn" hidden onclick="installPWA()" style="position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:9999;padding:14px 20px;border:0;border-radius:999px;font-weight:700;">📲 Instalar app</button>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const b = document.getElementById('installPwaBtn');
+  if (b) b.hidden = false;
+});
+window.addEventListener('appinstalled', () => {
+  const b = document.getElementById('installPwaBtn');
+  if (b) b.hidden = true;
+});
+async function installPWA(){
+  if (!deferredPrompt) {
+    alert('Si no aparece la instalación, abre esta app desde un sitio HTTPS y usa Chrome > ⋮ > Instalar aplicación.');
+    return;
+  }
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+}
+</script>
+</body></html>
